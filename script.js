@@ -1,16 +1,5 @@
-// ใส่ config Firebase ของตัวเองตรงนี้
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
 function addTask() {
   let pass = prompt("ใส่รหัสก่อนเพิ่มงาน");
-
   if (pass !== "212224") {
     alert("รหัสผิด");
     return;
@@ -19,10 +8,7 @@ function addTask() {
   const title = document.getElementById("title").value;
   const due = document.getElementById("due").value;
 
-  if (!title) {
-    alert("กรอกชื่องานก่อน");
-    return;
-  }
+  if (!title) return alert("กรอกชื่องานก่อน");
 
   db.collection("tasks").add({
     title: title,
@@ -35,16 +21,26 @@ function addTask() {
 
 function loadTasks() {
   db.collection("tasks").onSnapshot(snapshot => {
-    let html = "";
+    let tasks = [];
 
     snapshot.forEach(doc => {
-      const t = doc.data();
+      tasks.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
 
+    tasks.sort((a, b) => new Date(a.due) - new Date(b.due));
+
+    let html = "";
+
+    tasks.forEach(t => {
       html += `
         <div class="task">
           <b>${t.title}</b><br>
-          📅 ${t.due}<br>
-          <button onclick="deleteTask('${doc.id}')">ลบ</button>
+          📅 ${t.due}
+          <br>
+          <button onclick="deleteTask('${t.id}')">ลบ</button>
         </div>
       `;
     });
@@ -55,7 +51,6 @@ function loadTasks() {
 
 function deleteTask(id) {
   let pass = prompt("ใส่รหัสก่อนลบ");
-
   if (pass !== "212224") {
     alert("รหัสผิด");
     return;
