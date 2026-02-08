@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>To do list</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+
+  <h1>รายการงาน</h1>
+
+  <div class="card">
+    <input id="title" placeholder="ชื่องาน">
+    <input id="due" type="date">
+    <br>
+    <button onclick="addTask()">เพิ่มงาน</button>
+  </div>
+
+  <div id="taskList"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
