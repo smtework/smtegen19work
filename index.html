@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>งานห้อง</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+  <title>งาน</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
 
-  <h1>รายการงาน</h1>
+<h1>งาน</h1>
 
-  <div class="card">
-    <input id="title" placeholder="ชื่องาน">
-    <input id="due" type="date">
-    <br>
-    <button onclick="addTask()">เพิ่มงาน</button>
-  </div>
+<input type="text" id="title" placeholder="ชื่องาน">
+<input type="date" id="due">
+<br>
+<button onclick="addTask()">เพิ่มงาน</button>
 
-  <div id="taskList"></div>
+<h2>รายการงาน</h2>
+<div id="taskList"></div>
 
-  <script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDbfNf5jh-iuP7DjVbTXbdgvWznZBlR_7Y",
+  authDomain: "smtework-212.firebaseapp.com",
+  projectId: "smtework-212",
+  storageBucket: "smtework-212.firebasestorage.app",
+  messagingSenderId: "124891478423",
+  appId: "1:124891478423:web:e47c31ff584533e8006cd2"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+<script src="script.js"></script>
+
 </body>
 </html>
-
